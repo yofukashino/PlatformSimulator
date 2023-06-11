@@ -1,9 +1,7 @@
 export { types as DefaultTypes } from "replugged";
 import { types as DefaultTypes } from "replugged";
 
-export interface GenericModule {
-  [key: string]: DefaultTypes.AnyFunction;
-}
+export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
 
 export interface TitleBarClasses {
   focused: string;
@@ -26,6 +24,12 @@ export interface TitleBarClasses {
   wordmark: string;
   wordmarkMacOS: string;
   wordmarkWindows: string;
+}
+export interface PlatformTypes {
+  WINDOWS: string;
+  OSX: string;
+  LINUX: string;
+  WEB: string;
 }
 export interface Socket {
   analytics: object;
