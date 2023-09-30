@@ -14,7 +14,7 @@ export const patchUI = (): void => {
   ]);
   const isWindows = webpack.getFunctionKeyBySource<string>(
     PlatformChecks as string,
-    "/^win/.test(s)",
+    /\/\^win\/\.test\(\w+\)/,
   );
   PluginInjector.instead(
     PlatformChecks as Types.GenericModule,

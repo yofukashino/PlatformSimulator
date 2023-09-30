@@ -1,6 +1,8 @@
 import { webpack } from "replugged";
 import * as Types from "../types";
-export const PlatformChecks = webpack.getBySource<Types.GenericModule | string>("/^win/.test(s)");
+export const PlatformChecks = webpack.getBySource<Types.GenericModule | string>(
+  /\/\^win\/\.test\(\w+\)/,
+);
 export const TitleBarClasses = webpack.getByProps<Types.TitleBarClasses>(
   "macButton",
   "titleBar",
