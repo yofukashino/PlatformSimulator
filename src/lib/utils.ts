@@ -1,12 +1,15 @@
 import { util } from "replugged";
 import { PluginInjector } from "../index";
 
-export const forceUpdate = (element: HTMLElement): void => {
+export const forceRerenderElement = async (selector: string): Promise<void> => {
+  const element = await util.waitFor(selector);
   if (!element) return;
-  const toForceUpdate = util.getOwnerInstance(element);
-  const forceRerender = PluginInjector.instead(toForceUpdate, "render", () => {
-    forceRerender();
+  const ownerInstance = util.getOwnerInstance(element);
+  const unpatchRender = PluginInjector.instead(ownerInstance, "render", () => {
+    unpatchRender();
     return null;
   });
-  toForceUpdate.forceUpdate(() => toForceUpdate.forceUpdate(() => {}));
+  ownerInstance.forceUpdate(() => ownerInstance.forceUpdate(() => {}));
 };
+
+export default { ...util, forceRerenderElement };

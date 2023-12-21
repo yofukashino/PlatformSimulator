@@ -1,11 +1,10 @@
 import { PluginInjector, SettingValues } from "../index";
 import { GatewayConnectionStore, TitleBarClasses } from "../lib/requiredModules";
-import * as Utils from "../lib/utils";
+import Utils from "../lib/utils";
 
-export const patchSettingSetter = (): void => {
+export default (): void => {
   PluginInjector.after(SettingValues, "set", ([SettingIdentifier]) => {
-    const TitleBarElement = document.querySelector(`.${TitleBarClasses.titleBar}`);
-    if (SettingIdentifier === "UI") Utils.forceUpdate(TitleBarElement as HTMLElement);
+    if (SettingIdentifier === "UI") void Utils.forceRerenderElement(`.${TitleBarClasses.titleBar}`);
     if (SettingIdentifier === "WebSocket") GatewayConnectionStore.getSocket().close();
   });
 };

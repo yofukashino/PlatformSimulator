@@ -10,11 +10,11 @@ export const PluginInjector = new Injector();
 
 import { registerSettings } from "./Components/Settings";
 
-import { applyInjections } from "./patches/index";
+import Injections from "./patches/";
 
 export const start = (): void => {
   registerSettings();
-  applyInjections();
+  Injections.applyInjections();
 };
 
 export const stop = (): void => {

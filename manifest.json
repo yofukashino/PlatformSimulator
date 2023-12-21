@@ -2,17 +2,17 @@
   "id": "dev.tharki.PlatformSimulator",
   "name": "PlatformSimulator",
   "description": "Let's you trick Discord into thinking you're running on a different operating system.",
-  "image": "https://tharki-god.github.io/files-random-host/bdpluginsassets/platformsimulator.png",
-  "source": "https://github.com/Tharki-God/PlatformSimulator",
+  "image": "https://TharkiDev.github.io/files-random-host/bdpluginsassets/platformsimulator.png",
+  "source": "https://github.com/TharkiDev/PlatformSimulator",
   "author": {
     "name": "Ahlawat",
-    "discordID": "1025214794766221384",
-    "github": "Tharki-God"
+    "discordID": "1121961711080050780",
+    "github": "TharkiDev"
   },
   "version": "1.0.2",
   "updater": {
     "type": "github",
-    "id": "Tharki-God/PlatformSimulator"
+    "id": "TharkiDev/PlatformSimulator"
   },
   "license": "MIT",
   "type": "replugged-plugin",

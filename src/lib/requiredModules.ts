@@ -1,7 +1,8 @@
 import { webpack } from "replugged";
-import * as Types from "../types";
-export const PlatformChecks = webpack.getBySource<Types.GenericModule | string>(
-  /\/\^win\/\.test\(\w+\)/,
+import Types from "../types";
+export const PlatformChecks = webpack.getByProps<Types.PlatformChecks>(
+  "PlatformTypes",
+  "getNativePlatform",
 );
 export const TitleBarClasses = webpack.getByProps<Types.TitleBarClasses>(
   "macButton",

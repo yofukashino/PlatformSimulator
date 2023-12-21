@@ -1,7 +1,7 @@
 import { PluginInjector, SettingValues } from "../index";
 import { GatewayConnectionStore } from "../lib/requiredModules";
 import { GatewayRequestTypes, defaultSettings } from "../lib/consts";
-import * as Types from "../types";
+import Types from "../types";
 
 export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket => {
   switch (SettingValues.get("WebSocket", defaultSettings.WebSocket)) {
@@ -22,7 +22,7 @@ export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket => {
   }
 };
 
-export const patchGatewayConnectionStore = (): void => {
+export default (): void => {
   PluginInjector.before(
     GatewayConnectionStore.getSocket(),
     "send",
