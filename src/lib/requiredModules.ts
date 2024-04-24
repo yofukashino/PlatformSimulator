@@ -1,15 +1,21 @@
 import { webpack } from "replugged";
 import Types from "../types";
-export const PlatformChecks = webpack.getByProps<Types.PlatformChecks>(
-  "PlatformTypes",
-  "getNativePlatform",
-);
-export const TitleBarClasses = webpack.getByProps<Types.TitleBarClasses>(
-  "macButton",
-  "titleBar",
-  "winButton",
-  "wordmark",
-);
-export const GatewayConnectionStore =
-  webpack.getBySource<Types.GatewayConnectionStore>("GatewayConnectionStore");
-export const DiscordNative = webpack.getByProps<Types.DiscordNative>("clipboard", "process");
+
+export const Modules: Types.Modules = {};
+
+Modules.loadModules = async (): Promise<void> => {
+  Modules.PlatformCheckUtils ??= await webpack.waitForProps<Types.PlatformCheckUtils>(
+    "PlatformTypes",
+    "getNativePlatform",
+  );
+  Modules.TitleBarClasses ??= await webpack.waitForProps<Types.TitleBarClasses>(
+    "macButton",
+    "titleBar",
+    "winButton",
+    "wordmark",
+  );
+  Modules.GatewayConnectionStore =
+    webpack.getByStoreName<Types.GatewayConnectionStore>("GatewayConnectionStore");
+};
+
+export default Modules;

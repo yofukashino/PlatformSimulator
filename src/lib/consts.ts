@@ -1,4 +1,3 @@
-import { DiscordNative } from "./requiredModules";
 export const defaultSettings = {
   UI: DiscordNative.process.platform,
   WebSocket: DiscordNative.process.platform,

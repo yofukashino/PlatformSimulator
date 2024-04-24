@@ -3,16 +3,16 @@
   "name": "PlatformSimulator",
   "description": "Let's you trick Discord into thinking you're running on a different operating system.",
   "image": "https://i.imgur.com/mjecPSV.png",
-  "source": "https://github.com/TharkiDev/PlatformSimulator",
+  "source": "https://github.com/YofukashiNo/PlatformSimulator",
   "author": {
-    "name": "Ahlawat",
+    "name": "Nanakusa",
     "discordID": "1121961711080050780",
-    "github": "TharkiDev"
+    "github": "YofukashiNo"
   },
   "version": "1.0.3",
   "updater": {
     "type": "github",
-    "id": "TharkiDev/PlatformSimulator"
+    "id": "YofukashiNo/PlatformSimulator"
   },
   "license": "MIT",
   "type": "replugged-plugin",

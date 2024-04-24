@@ -1,7 +1,8 @@
 import { types } from "replugged";
+import { Store } from "replugged/dist/renderer/modules/common/flux";
 export namespace Types {
   export import DefaultTypes = types;
-  export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
+  export type GenericModule = Record<string, DefaultTypes.AnyFunction>;
   export interface TitleBarClasses {
     focused: string;
     macButton: string;
@@ -24,7 +25,7 @@ export namespace Types {
     wordmarkMacOS: string;
     wordmarkWindows: string;
   }
-  export interface PlatformChecks {
+  export interface PlatformCheckUtils {
     PlatformTypes: {
       WINDOWS: string;
       OSX: string;
@@ -145,7 +146,7 @@ export namespace Types {
     _stopHeartbeater: DefaultTypes.AnyFunction;
     _updateLastHeartbeatAckTime: DefaultTypes.AnyFunction;
   }
-  export interface GatewayConnectionStore {
+  export interface GatewayConnectionStore extends Store {
     getSocket: () => Socket;
     initialize: DefaultTypes.AnyFunction;
     isConnected: DefaultTypes.AnyFunction;
@@ -165,97 +166,111 @@ export namespace Types {
     properties: object;
     token: string;
   }
-  export interface DiscordNative {
+  export interface Modules {
+    loadModules?: () => Promise<void>;
+    PlatformCheckUtils?: PlatformCheckUtils;
+    TitleBarClasses?: TitleBarClasses;
+    GatewayConnectionStore?: GatewayConnectionStore;
+  }
+  export interface Settings {
+    UI: string;
+    WebSocket: string;
+  }
+}
+export default Types;
+
+declare global {
+  export const DiscordNative: {
     accessibility: {
-      isAccessibilitySupportEnabled: DefaultTypes.AnyFunction;
+      isAccessibilitySupportEnabled: Types.DefaultTypes.AnyFunction;
     };
     app: {
       dock: {
-        setBadge: DefaultTypes.AnyFunction;
-        bounce: DefaultTypes.AnyFunction;
-        cancelBounce: DefaultTypes.AnyFunction;
+        setBadge: Types.DefaultTypes.AnyFunction;
+        bounce: Types.DefaultTypes.AnyFunction;
+        cancelBounce: Types.DefaultTypes.AnyFunction;
       };
-      getBuildNumber: DefaultTypes.AnyFunction;
-      getDefaultDoubleClickAction: DefaultTypes.AnyFunction;
-      getModuleVersions: DefaultTypes.AnyFunction;
-      getPath: DefaultTypes.AnyFunction;
-      getReleaseChannel: DefaultTypes.AnyFunction;
-      getVersion: DefaultTypes.AnyFunction;
-      registerUserInteractionHandler: DefaultTypes.AnyFunction;
-      relaunch: DefaultTypes.AnyFunction;
-      setBadgeCount: DefaultTypes.AnyFunction;
+      getBuildNumber: Types.DefaultTypes.AnyFunction;
+      getDefaultDoubleClickAction: Types.DefaultTypes.AnyFunction;
+      getModuleVersions: Types.DefaultTypes.AnyFunction;
+      getPath: Types.DefaultTypes.AnyFunction;
+      getReleaseChannel: Types.DefaultTypes.AnyFunction;
+      getVersion: Types.DefaultTypes.AnyFunction;
+      registerUserInteractionHandler: Types.DefaultTypes.AnyFunction;
+      relaunch: Types.DefaultTypes.AnyFunction;
+      setBadgeCount: Types.DefaultTypes.AnyFunction;
     };
     clipboard: {
-      copy: DefaultTypes.AnyFunction;
-      copyImage: DefaultTypes.AnyFunction;
-      cut: DefaultTypes.AnyFunction;
-      paste: DefaultTypes.AnyFunction;
-      read: DefaultTypes.AnyFunction;
+      copy: Types.DefaultTypes.AnyFunction;
+      copyImage: Types.DefaultTypes.AnyFunction;
+      cut: Types.DefaultTypes.AnyFunction;
+      paste: Types.DefaultTypes.AnyFunction;
+      read: Types.DefaultTypes.AnyFunction;
     };
     clips: {
-      deleteClip: DefaultTypes.AnyFunction;
-      loadClip: DefaultTypes.AnyFunction;
-      loadClipsDirectory: DefaultTypes.AnyFunction;
+      deleteClip: Types.DefaultTypes.AnyFunction;
+      loadClip: Types.DefaultTypes.AnyFunction;
+      loadClipsDirectory: Types.DefaultTypes.AnyFunction;
     };
     crashReporter: {
-      getMetadata: DefaultTypes.AnyFunction;
-      updateCrashReporter: DefaultTypes.AnyFunction;
+      getMetadata: Types.DefaultTypes.AnyFunction;
+      updateCrashReporter: Types.DefaultTypes.AnyFunction;
     };
     desktopCapture: {
-      getDesktopCaptureSources: DefaultTypes.AnyFunction;
+      getDesktopCaptureSources: Types.DefaultTypes.AnyFunction;
     };
     features: {
-      declareSupported: DefaultTypes.AnyFunction;
-      supports: DefaultTypes.AnyFunction;
+      declareSupported: Types.DefaultTypes.AnyFunction;
+      supports: Types.DefaultTypes.AnyFunction;
     };
     fileManager: {
-      basename: DefaultTypes.AnyFunction;
-      cleanupTempFiles: DefaultTypes.AnyFunction;
-      dirname: DefaultTypes.AnyFunction;
-      extname: DefaultTypes.AnyFunction;
-      getModuleDataPathSync: DefaultTypes.AnyFunction;
-      getModulePath: DefaultTypes.AnyFunction;
-      join: DefaultTypes.AnyFunction;
-      openFiles: DefaultTypes.AnyFunction;
-      readLogFiles: DefaultTypes.AnyFunction;
-      readTimeSeriesLogFiles: DefaultTypes.AnyFunction;
-      saveWithDialog: DefaultTypes.AnyFunction;
-      showItemInFolder: DefaultTypes.AnyFunction;
-      showOpenDialog: DefaultTypes.AnyFunction;
+      basename: Types.DefaultTypes.AnyFunction;
+      cleanupTempFiles: Types.DefaultTypes.AnyFunction;
+      dirname: Types.DefaultTypes.AnyFunction;
+      extname: Types.DefaultTypes.AnyFunction;
+      getModuleDataPathSync: Types.DefaultTypes.AnyFunction;
+      getModulePath: Types.DefaultTypes.AnyFunction;
+      join: Types.DefaultTypes.AnyFunction;
+      openFiles: Types.DefaultTypes.AnyFunction;
+      readLogFiles: Types.DefaultTypes.AnyFunction;
+      readTimeSeriesLogFiles: Types.DefaultTypes.AnyFunction;
+      saveWithDialog: Types.DefaultTypes.AnyFunction;
+      showItemInFolder: Types.DefaultTypes.AnyFunction;
+      showOpenDialog: Types.DefaultTypes.AnyFunction;
     };
     gpuSettings: {
-      getEnableHardwareAcceleration: DefaultTypes.AnyFunction;
-      setEnableHardwareAcceleration: DefaultTypes.AnyFunction;
+      getEnableHardwareAcceleration: Types.DefaultTypes.AnyFunction;
+      setEnableHardwareAcceleration: Types.DefaultTypes.AnyFunction;
     };
     http: {
-      getAPIEndpoint: DefaultTypes.AnyFunction;
-      makeChunkedRequest: DefaultTypes.AnyFunction;
+      getAPIEndpoint: Types.DefaultTypes.AnyFunction;
+      makeChunkedRequest: Types.DefaultTypes.AnyFunction;
     };
     ipc: {
-      invoke: DefaultTypes.AnyFunction;
-      on: DefaultTypes.AnyFunction;
-      send: DefaultTypes.AnyFunction;
+      invoke: Types.DefaultTypes.AnyFunction;
+      on: Types.DefaultTypes.AnyFunction;
+      send: Types.DefaultTypes.AnyFunction;
     };
     isRenderer: boolean;
     nativeModules: {
       canBootstrapNewUpdater: boolean;
-      ensureModule: DefaultTypes.AnyFunction;
-      requireModule: DefaultTypes.AnyFunction;
+      ensureModule: Types.DefaultTypes.AnyFunction;
+      requireModule: Types.DefaultTypes.AnyFunction;
     };
     os: {
       arch: string;
       release: string;
     };
     powerMonitor: {
-      getSystemIdleTimeMs: DefaultTypes.AnyFunction;
-      on: DefaultTypes.AnyFunction;
-      removeAllListeners: DefaultTypes.AnyFunction;
-      removeListener: DefaultTypes.AnyFunction;
+      getSystemIdleTimeMs: Types.DefaultTypes.AnyFunction;
+      on: Types.DefaultTypes.AnyFunction;
+      removeAllListeners: Types.DefaultTypes.AnyFunction;
+      removeListener: Types.DefaultTypes.AnyFunction;
     };
     powerSaveBlocker: {
-      blockDisplaySleep: DefaultTypes.AnyFunction;
-      cleanupDisplaySleep: DefaultTypes.AnyFunction;
-      unblockDisplaySleep: DefaultTypes.AnyFunction;
+      blockDisplaySleep: Types.DefaultTypes.AnyFunction;
+      cleanupDisplaySleep: Types.DefaultTypes.AnyFunction;
+      unblockDisplaySleep: Types.DefaultTypes.AnyFunction;
     };
     process: {
       arch: string;
@@ -263,85 +278,79 @@ export namespace Types {
       platform: string;
     };
     processUtils: {
-      flushCookies: DefaultTypes.AnyFunction;
-      flushDNSCache: DefaultTypes.AnyFunction;
-      flushStorageData: DefaultTypes.AnyFunction;
-      getCPUCoreCount: DefaultTypes.AnyFunction;
-      getCurrentCPUUsagePercent: DefaultTypes.AnyFunction;
-      getCurrentMemoryUsageKB: DefaultTypes.AnyFunction;
-      getLastCrash: DefaultTypes.AnyFunction;
-      getMainArgvSync: DefaultTypes.AnyFunction;
-      purgeMemory: DefaultTypes.AnyFunction;
+      flushCookies: Types.DefaultTypes.AnyFunction;
+      flushDNSCache: Types.DefaultTypes.AnyFunction;
+      flushStorageData: Types.DefaultTypes.AnyFunction;
+      getCPUCoreCount: Types.DefaultTypes.AnyFunction;
+      getCurrentCPUUsagePercent: Types.DefaultTypes.AnyFunction;
+      getCurrentMemoryUsageKB: Types.DefaultTypes.AnyFunction;
+      getLastCrash: Types.DefaultTypes.AnyFunction;
+      getMainArgvSync: Types.DefaultTypes.AnyFunction;
+      purgeMemory: Types.DefaultTypes.AnyFunction;
     };
     remoteApp: {
       dock: {
-        setBadge: DefaultTypes.AnyFunction;
-        bounce: DefaultTypes.AnyFunction;
-        cancelBounce: DefaultTypes.AnyFunction;
+        setBadge: Types.DefaultTypes.AnyFunction;
+        bounce: Types.DefaultTypes.AnyFunction;
+        cancelBounce: Types.DefaultTypes.AnyFunction;
       };
-      getBuildNumber: DefaultTypes.AnyFunction;
-      getDefaultDoubleClickAction: DefaultTypes.AnyFunction;
-      getModuleVersions: DefaultTypes.AnyFunction;
-      getPath: DefaultTypes.AnyFunction;
-      getReleaseChannel: DefaultTypes.AnyFunction;
-      getVersion: DefaultTypes.AnyFunction;
-      registerUserInteractionHandler: DefaultTypes.AnyFunction;
-      relaunch: DefaultTypes.AnyFunction;
-      setBadgeCount: DefaultTypes.AnyFunction;
+      getBuildNumber: Types.DefaultTypes.AnyFunction;
+      getDefaultDoubleClickAction: Types.DefaultTypes.AnyFunction;
+      getModuleVersions: Types.DefaultTypes.AnyFunction;
+      getPath: Types.DefaultTypes.AnyFunction;
+      getReleaseChannel: Types.DefaultTypes.AnyFunction;
+      getVersion: Types.DefaultTypes.AnyFunction;
+      registerUserInteractionHandler: Types.DefaultTypes.AnyFunction;
+      relaunch: Types.DefaultTypes.AnyFunction;
+      setBadgeCount: Types.DefaultTypes.AnyFunction;
     };
     remotePowerMonitor: {
-      getSystemIdleTimeMs: DefaultTypes.AnyFunction;
-      on: DefaultTypes.AnyFunction;
-      removeAllListeners: DefaultTypes.AnyFunction;
-      removeListener: DefaultTypes.AnyFunction;
+      getSystemIdleTimeMs: Types.DefaultTypes.AnyFunction;
+      on: Types.DefaultTypes.AnyFunction;
+      removeAllListeners: Types.DefaultTypes.AnyFunction;
+      removeListener: Types.DefaultTypes.AnyFunction;
     };
     safeStorage: {
-      decryptString: DefaultTypes.AnyFunction;
-      encryptString: DefaultTypes.AnyFunction;
-      isEncryptionAvailable: DefaultTypes.AnyFunction;
+      decryptString: Types.DefaultTypes.AnyFunction;
+      encryptString: Types.DefaultTypes.AnyFunction;
+      isEncryptionAvailable: Types.DefaultTypes.AnyFunction;
     };
-    setUncaughtExceptionHandler: DefaultTypes.AnyFunction;
+    setUncaughtExceptionHandler: Types.DefaultTypes.AnyFunction;
     settings: {
-      get: DefaultTypes.AnyFunction;
-      getSync: DefaultTypes.AnyFunction;
-      set: DefaultTypes.AnyFunction;
+      get: Types.DefaultTypes.AnyFunction;
+      getSync: Types.DefaultTypes.AnyFunction;
+      set: Types.DefaultTypes.AnyFunction;
     };
     spellCheck: {
-      getAvailableDictionaries: DefaultTypes.AnyFunction;
-      on: DefaultTypes.AnyFunction;
-      removeListener: DefaultTypes.AnyFunction;
-      replaceMisspelling: DefaultTypes.AnyFunction;
-      setLearnedWords: DefaultTypes.AnyFunction;
-      setLocale: DefaultTypes.AnyFunction;
+      getAvailableDictionaries: Types.DefaultTypes.AnyFunction;
+      on: Types.DefaultTypes.AnyFunction;
+      removeListener: Types.DefaultTypes.AnyFunction;
+      replaceMisspelling: Types.DefaultTypes.AnyFunction;
+      setLearnedWords: Types.DefaultTypes.AnyFunction;
+      setLocale: Types.DefaultTypes.AnyFunction;
     };
-    thumbar: { setThumbarButtons: DefaultTypes.AnyFunction };
+    thumbar: { setThumbarButtons: Types.DefaultTypes.AnyFunction };
     userDataCache: {
-      cacheUserData: DefaultTypes.AnyFunction;
-      deleteCache: DefaultTypes.AnyFunction;
-      getCached: DefaultTypes.AnyFunction;
+      cacheUserData: Types.DefaultTypes.AnyFunction;
+      deleteCache: Types.DefaultTypes.AnyFunction;
+      getCached: Types.DefaultTypes.AnyFunction;
     };
     window: {
       USE_OSX_NATIVE_TRAFFIC_LIGHTS: boolean;
-      blur: DefaultTypes.AnyFunction;
-      close: DefaultTypes.AnyFunction;
-      flashFrame: DefaultTypes.AnyFunction;
-      focus: DefaultTypes.AnyFunction;
-      fullscreen: DefaultTypes.AnyFunction;
-      isAlwaysOnTop: DefaultTypes.AnyFunction;
-      maximize: DefaultTypes.AnyFunction;
-      minimize: DefaultTypes.AnyFunction;
-      restore: DefaultTypes.AnyFunction;
-      setAlwaysOnTop: DefaultTypes.AnyFunction;
-      setBackgroundThrottling: DefaultTypes.AnyFunction;
-      setDevtoolsCallbacks: DefaultTypes.AnyFunction;
-      setProgressBar: DefaultTypes.AnyFunction;
-      setZoomFactor: DefaultTypes.AnyFunction;
+      blur: Types.DefaultTypes.AnyFunction;
+      close: Types.DefaultTypes.AnyFunction;
+      flashFrame: Types.DefaultTypes.AnyFunction;
+      focus: Types.DefaultTypes.AnyFunction;
+      fullscreen: Types.DefaultTypes.AnyFunction;
+      isAlwaysOnTop: Types.DefaultTypes.AnyFunction;
+      maximize: Types.DefaultTypes.AnyFunction;
+      minimize: Types.DefaultTypes.AnyFunction;
+      restore: Types.DefaultTypes.AnyFunction;
+      setAlwaysOnTop: Types.DefaultTypes.AnyFunction;
+      setBackgroundThrottling: Types.DefaultTypes.AnyFunction;
+      setDevtoolsCallbacks: Types.DefaultTypes.AnyFunction;
+      setProgressBar: Types.DefaultTypes.AnyFunction;
+      setZoomFactor: Types.DefaultTypes.AnyFunction;
     };
-  }
-
-  export interface Settings {
-    UI: string;
-    WebSocket: string;
-  }
+  };
 }
-export default Types;
