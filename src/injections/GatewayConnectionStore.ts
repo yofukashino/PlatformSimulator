@@ -10,7 +10,6 @@ export default (): void => {
     res.send = (...args: [number, Types.IdentityProps]) => {
       const [EventType, IdentityProps] = args;
       if (EventType !== GatewayRequestTypes.IDENTIFY) return originalSend(...args);
-      console.log(args);
       IdentityProps.properties = Utils.getCurrentPlatformWebsocket();
       return originalSend(...args);
     };
