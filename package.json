@@ -1,6 +1,6 @@
 {
   "name": "platfrom-simulator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Let's you trick Discord into thinking you're running on a different operating system.",
   "engines": {
     "node": ">=14.0.0"
