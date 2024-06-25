@@ -4,16 +4,14 @@ import Types from "../types";
 export const Modules: Types.Modules = {};
 
 Modules.loadModules = async (): Promise<void> => {
-  Modules.PlatformCheckUtils ??= await webpack.waitForProps<Types.PlatformCheckUtils>(
-    "PlatformTypes",
-    "getNativePlatform",
-  );
-  Modules.TitleBarClasses ??= await webpack.waitForProps<Types.TitleBarClasses>(
-    "macButton",
-    "titleBar",
-    "winButton",
-    "wordmark",
-  );
+  Modules.PlatformCheckUtils ??= await webpack
+    .waitForProps<Types.PlatformCheckUtils>(["PlatformTypes", "getNativePlatform"], {
+      timeout: 10000,
+    })
+    .catch(() => {
+      throw new Error("Failed To Find PlatformCheckUtils Module");
+    });
+
   Modules.GatewayConnectionStore =
     webpack.getByStoreName<Types.GatewayConnectionStore>("GatewayConnectionStore");
 };

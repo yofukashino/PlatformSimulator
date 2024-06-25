@@ -169,7 +169,7 @@ export namespace Types {
   export interface Modules {
     loadModules?: () => Promise<void>;
     PlatformCheckUtils?: PlatformCheckUtils;
-    TitleBarClasses?: TitleBarClasses;
+
     GatewayConnectionStore?: GatewayConnectionStore;
   }
   export interface Settings {

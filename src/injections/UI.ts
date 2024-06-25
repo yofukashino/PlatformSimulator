@@ -7,7 +7,6 @@ export default (): void => {
   const {
     PlatformCheckUtils,
     PlatformCheckUtils: { PlatformTypes },
-    TitleBarClasses,
   } = Modules;
   PluginInjector.instead(
     PlatformCheckUtils,
@@ -41,5 +40,5 @@ export default (): void => {
   PluginInjector.instead(PlatformCheckUtils, "getPlatformName", () =>
     SettingValues.get("UI", defaultSettings.UI),
   );
-  void Utils.forceRerenderElement(`.${TitleBarClasses.titleBar}`);
+  void Utils.forceRerenderElement('#app-mount > [class*="titleBar_"]');
 };

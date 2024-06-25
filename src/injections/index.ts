@@ -10,13 +10,13 @@ export const applyInjections = async (): Promise<void> => {
   injectSettingSetter();
   injectUI();
   Utils.closeWebsocket();
-  void Utils.forceRerenderElement(`.${Modules.TitleBarClasses?.titleBar}`);
+  void Utils.forceRerenderElement('#app-mount > [class*="titleBar_"]');
 };
 
 export const removeInjections = (): void => {
   PluginInjector.uninjectAll();
   Utils.closeWebsocket();
-  void Utils.forceRerenderElement(`.${Modules.TitleBarClasses?.titleBar}`);
+  void Utils.forceRerenderElement('#app-mount > [class*="titleBar_"]');
 };
 
 export default { applyInjections, removeInjections };
