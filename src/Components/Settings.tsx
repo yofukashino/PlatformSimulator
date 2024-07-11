@@ -37,6 +37,10 @@ export const Settings = () => {
           { label: "Web", value: "web" },
           { label: "Android", value: "android" },
           { label: "iOS", value: "ios" },
+          {
+            label: "Embedded (Console)",
+            value: "embedded",
+          },
         ]}
         {...Utils.useSetting(SettingValues, "WebSocket", defaultSettings.WebSocket)}>
         Websocket

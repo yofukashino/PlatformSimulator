@@ -31,6 +31,8 @@ export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket => {
       return { browser: "Discord Android", os: "Android" };
     case "ios":
       return { browser: "Discord iOS", os: "iOS" };
+    case "embedded":
+      return { browser: "Discord Embedded", os: "unknown" };
   }
 };
 
