@@ -40,5 +40,13 @@ export default (): void => {
   PluginInjector.instead(PlatformCheckUtils, "getPlatformName", () =>
     SettingValues.get("UI", defaultSettings.UI),
   );
+  PluginInjector.instead(PlatformCheckUtils, "isWeb", () => false);
+  PluginInjector.instead(PlatformCheckUtils, "isAndroid", () => false);
+  PluginInjector.instead(PlatformCheckUtils, "isAndroidChrome", () => false);
+
+  PluginInjector.instead(PlatformCheckUtils, "isAndroidWeb", () => false);
+  PluginInjector.instead(PlatformCheckUtils, "isIOS", () => false);
+  PluginInjector.instead(PlatformCheckUtils, "isDesktop", () => true);
+
   void Utils.forceRerenderElement('#app-mount > [class*="titleBar_"]');
 };

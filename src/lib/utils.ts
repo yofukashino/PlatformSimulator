@@ -15,7 +15,7 @@ export const forceRerenderElement = async (selector: string): Promise<void> => {
   ownerInstance.forceUpdate(() => ownerInstance.forceUpdate(() => {}));
 };
 
-export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket => {
+export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket | {} => {
   switch (SettingValues.get("WebSocket", defaultSettings.WebSocket)) {
     case "win32":
       return { browser: "Discord Client", os: "Windows" };
@@ -32,7 +32,13 @@ export const getCurrentPlatformWebsocket = (): Types.PlatformWebsocket => {
     case "ios":
       return { browser: "Discord iOS", os: "iOS" };
     case "embedded":
-      return { browser: "Discord Embedded", os: "unknown" };
+      return { browser: "Discord Embedded", os: "Other" };
+    case "playstation":
+      return { browser: "Discord Embedded", os: "Playstation" };
+    case "xbox":
+      return { browser: "Discord Embedded", os: "Xbox" };
+    case "none":
+      return {};
   }
 };
 
