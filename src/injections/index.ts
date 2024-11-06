@@ -8,7 +8,7 @@ export const applyInjections = async (): Promise<void> => {
   await Modules.loadModules();
   injectGatewayConnectionStore();
   injectSettingSetter();
-  injectUI();
+  injectUI(); 
   Utils.closeWebsocket();
   void Utils.forceRerenderElement('#app-mount > [class*="titleBar_"]');
 };

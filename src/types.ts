@@ -162,8 +162,28 @@ export namespace Types {
     capabilities: number;
     client_state: object;
     compress: boolean;
-    presence: object;
-    properties: object;
+    presence: {
+      activities: unknown[];
+      afk: boolean;
+      broadcast?: unknown;
+      since: number;
+      status: string;
+    };
+    properties: {
+      app_arch?: string;
+      browser?: string;
+      browser_user_agent?: string;
+      browser_version?: string;
+      client_build_number?: number;
+      client_event_source?: null | string;
+      client_version?: string;
+      native_build_number?: number;
+      os?: string;
+      os_arch?: string;
+      os_version?: string;
+      release_channel?: string;
+      system_locale?: string;
+    };
     token: string;
   }
   export interface Modules {
